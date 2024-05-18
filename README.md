@@ -1,4 +1,4 @@
-# flutter_application_beta
+# APP JAM 2024 TEAM 48
 
 A new Flutter project.
 
