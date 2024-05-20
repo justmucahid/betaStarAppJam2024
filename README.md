@@ -10,12 +10,12 @@ Team Members
 
 
 
-Add API_KEY
+Add API_KEY ---->
 .env
 API_KEY= API KEY
 
 
-Add API_KEY
+Add API_KEY  ---->
 
 lib/data/config.dart
 class GenAIConfig {
