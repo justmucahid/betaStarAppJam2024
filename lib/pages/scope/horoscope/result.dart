@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -19,16 +20,34 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    _model = GenerativeModel(model: "gemini-pro", apiKey: dotenv.env['API_KEY']!);
+    _model =
+        GenerativeModel(model: "gemini-pro", apiKey: dotenv.env['API_KEY']!);
     _chat = _model.startChat();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    bool hasApiKey = dotenv.env['API_KEY'] != null && dotenv.env['API_KEY']!.isNotEmpty;
+    bool hasApiKey =
+        dotenv.env['API_KEY'] != null && dotenv.env['API_KEY']!.isNotEmpty;
     return Scaffold(
-      body : Padding(
+      appBar: AppBar(
+        leadingWidth: 90,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          iconSize: 45,
+          color: Colors.blueGrey,
+          icon: Icon(
+            CupertinoIcons.chevron_left_circle_fill,
+          ),
+        ),
+        centerTitle: true,
+        titleTextStyle: TextStyle(color: Colors.black, fontSize: 40),
+        title: Text('Düş Yıldızı'),
+      ),
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -37,22 +56,25 @@ class _ChatScreenState extends State<ChatScreen> {
             Expanded(
               child: hasApiKey
                   ? ListView.builder(
-                controller: _scrollController,
-                itemBuilder: (context, idx) {
-                  final content = _chat.history.toList()[idx];
-                  final text = content.parts.whereType<TextPart>().map<String>((e) => e.text).join('');
-                  return MessageWidget(
-                    text: text,
-                    isFromUser: content.role == 'user',
-                  );
-                },
-                itemCount: _chat.history.length,
-              )
+                      controller: _scrollController,
+                      itemBuilder: (context, idx) {
+                        final content = _chat.history.toList()[idx];
+                        final text = content.parts
+                            .whereType<TextPart>()
+                            .map<String>((e) => e.text)
+                            .join('');
+                        return MessageWidget(
+                          text: text,
+                          isFromUser: content.role == 'user',
+                        );
+                      },
+                      itemCount: _chat.history.length,
+                    )
                   : ListView(
-                children: const [
-                  Text('No API key found. Please provide an API Key.'),
-                ],
-              ),
+                      children: const [
+                        Text('No API key found. Please provide an API Key.'),
+                      ],
+                    ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -108,20 +130,12 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  
-                });
-                Navigator.pop(context);
-              },
-              child: const Text('Go back!'),
-            ),
           ],
         ),
       ),
     );
   }
+
   Future<void> _sendChatMessage(String message) async {
     setState(() => _loading = true);
 
@@ -142,8 +156,6 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
-
-
 class MessageWidget extends StatelessWidget {
   final String text;
   final bool isFromUser;
@@ -157,7 +169,8 @@ class MessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: isFromUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+      mainAxisAlignment:
+          isFromUser ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Flexible(
           child: Container(
