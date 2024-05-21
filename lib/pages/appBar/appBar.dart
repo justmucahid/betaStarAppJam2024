@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_beta/pages/abilityList/abilityList.dart';
+import 'package:flutter_application_beta/pages/appBar/abilityList.dart';
 import 'package:flutter_application_beta/pages/scope/horoscope/chracter.dart';
 import 'package:flutter_application_beta/pages/scope/horoscope/result.dart';
 

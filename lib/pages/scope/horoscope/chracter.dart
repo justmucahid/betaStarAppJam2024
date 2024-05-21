@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_beta/pages/scope/saved/savedList.dart';
 
 class DailyResult extends StatefulWidget {
   const DailyResult({super.key});
@@ -9,6 +10,9 @@ class DailyResult extends StatefulWidget {
 }
 
 class _DailyResultState extends State<DailyResult> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +29,26 @@ class _DailyResultState extends State<DailyResult> {
             ),
           ),
           centerTitle: true,
-          titleTextStyle: TextStyle(color: Colors.black, fontSize: 40),
+          titleTextStyle: TextStyle(color: Colors.black, fontSize: 30),
           title: Text('Düş Yıldızı'),
         ),
-        body: Center(child: Text('data')));
+        body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Text('Kaydedilenler',
+            style: TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.bold
+            ),),
+            SizedBox(
+              height: 30,
+            ),
+            Saved(),
+          ],
+        )));
   }
 }
